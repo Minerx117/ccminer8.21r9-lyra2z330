@@ -1,0 +1,1 @@
+# ccminer8.21r9-lyra2z330
