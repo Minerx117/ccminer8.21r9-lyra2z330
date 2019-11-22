@@ -45,28 +45,11 @@ int scanhash_lyra2_base(int thr_id, uint32_t *pdata,
 	cudaGetDeviceProperties(&props, dev_id);
 
 	uint32_t CUDAcore_count;
-	if (device_sm[dev_id] == 600)		// Pascal(P100)
-		CUDAcore_count = props.multiProcessorCount * 64;
-	else if (device_sm[dev_id] >= 500)	// Maxwell/Pascal(other)/Volta
+
 		CUDAcore_count = props.multiProcessorCount * 128;
-	else if (device_sm[dev_id] >= 300)	// Kepler
-		CUDAcore_count = props.multiProcessorCount * 96; // * 192
-	else if (device_sm[dev_id] >= 210)	// Fermi(GF11x)
-		CUDAcore_count = props.multiProcessorCount * 48;
-	else					// Fermi(GF10x)
-		CUDAcore_count = props.multiProcessorCount * 32;
 
 	uint32_t throughputmax;
 
-	if (device_sm[dev_id] > 500)		// Maxwell(GTX9xx)/Pascal/Volta
-		throughputmax = device_intensity(dev_id, __func__, CUDAcore_count);
-	else if (device_sm[dev_id] == 500)	// Maxwell(GTX750Ti/GTX750)
-		throughputmax = device_intensity(dev_id, __func__, CUDAcore_count);
-	else if (device_sm[dev_id] >= 300)	// Kepler
-		throughputmax = device_intensity(dev_id, __func__, CUDAcore_count);
-	else if (device_sm[dev_id] >= 210)	// Fermi(GF11x)
-		throughputmax = device_intensity(dev_id, __func__, CUDAcore_count);
-	else								// Fermi(GF10x)
 		throughputmax = device_intensity(dev_id, __func__, CUDAcore_count);
 
 	throughputmax = (throughputmax / CUDAcore_count) * CUDAcore_count * 3;
