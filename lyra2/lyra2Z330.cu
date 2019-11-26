@@ -36,23 +36,20 @@ int scanhash_lyra2_base(int thr_id, uint32_t *pdata,
 	const uint32_t first_nonce = pdata[19];
 	int dev_id = device_map[thr_id];
 
-	static THREAD uint32_t *d_hash1 = nullptr;
-	static THREAD uint32_t *d_hash2 = nullptr;
-	static THREAD uint32_t *d_hash3 = nullptr;
-	static THREAD uint32_t *d_hash4 = nullptr;
+	static THREAD uint32_t *d_hash = nullptr;
 
 	cudaDeviceProp props;
 	cudaGetDeviceProperties(&props, dev_id);
 
 	uint32_t CUDAcore_count;
 
-		CUDAcore_count = props.multiProcessorCount * 128;
+		CUDAcore_count = props.multiProcessorCount * 32;
 
 	uint32_t throughputmax;
 
 		throughputmax = device_intensity(dev_id, __func__, CUDAcore_count);
 
-	throughputmax = (throughputmax / CUDAcore_count) * CUDAcore_count * 3;
+	throughputmax = (throughputmax / CUDAcore_count) * CUDAcore_count;
 	if (throughputmax == 0) throughputmax = CUDAcore_count;
 
 	uint32_t throughput = min(throughputmax, max_nonce - first_nonce);

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -141,7 +141,7 @@
       <MaxRegCount>80</MaxRegCount>
       <PtxAsOptionV>true</PtxAsOptionV>
       <Keep>true</Keep>
-      <CodeGeneration>compute_50,sm_50</CodeGeneration>
+      <CodeGeneration>compute_61,sm_61</CodeGeneration>
       <Include>$(NVTOOLSEXT_PATH)\include;..\..\..\Common\C99</Include>
     </CudaCompile>
     <CudaLink>
@@ -188,7 +188,7 @@
       <MaxRegCount>80</MaxRegCount>
       <PtxAsOptionV>true</PtxAsOptionV>
       <Keep>true</Keep>
-      <CodeGeneration>compute_62,sm_62;compute_60,sm_60;compute_61,sm_61;compute_52,sm_52;compute_50,sm_50;</CodeGeneration>
+      <CodeGeneration>compute_61,sm_61;compute_60,sm_60;compute_52,sm_52;compute_50,sm_50;</CodeGeneration>
       <AdditionalOptions>--ptxas-options="-O2" %(AdditionalOptions)</AdditionalOptions>
       <Defines>
       </Defines>
@@ -246,7 +246,7 @@
       <MaxRegCount>80</MaxRegCount>
       <PtxAsOptionV>false</PtxAsOptionV>
       <Keep>true</Keep>
-      <CodeGeneration>compute_60,sm_60;compute_61,sm_61;compute_52,sm_52;compute_50,sm_50;compute_70,sm_70</CodeGeneration>
+      <CodeGeneration>compute_52,sm_52;compute_61,sm_61;compute_75,sm_75</CodeGeneration>
       <Include>
       </Include>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -285,7 +285,7 @@
     <CudaCompile Include="lyra2\lyra2Z330.cu" />
     <CudaCompile Include="neoscrypt\cuda_neoscrypt_tpruvot.cu">
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_52,sm_52;compute_50,sm_50</CodeGeneration>
-      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_70,sm_70;compute_52,sm_52;compute_50,sm_50</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_75,sm_75;compute_61,sm_61;compute_52,sm_52</CodeGeneration>
     </CudaCompile>
     <CudaCompile Include="Sia\sia.cu" />
     <ClCompile Include="nvapi.cpp" />
